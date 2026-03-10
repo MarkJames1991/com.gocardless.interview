@@ -12,11 +12,6 @@ export const appRoutes: AppRoute[] = [
     description: 'Create, organize, and publish subscription templates for customers.',
   },
   {
-    path: '/payouts',
-    title: 'Payouts',
-    description: 'Track outgoing payouts and their settlement status.',
-  },
-  {
     path: '/customers',
     title: 'Customers',
     description: 'Find customers, manage mandates, and take new payments.',

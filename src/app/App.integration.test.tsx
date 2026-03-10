@@ -24,13 +24,13 @@ describe('App routing and layout', () => {
     expect(screen.getByText('Pending payouts')).toBeInTheDocument()
   })
 
-  it('renders the payments empty state on the payments route', () => {
+  it('renders the payments table route', () => {
     renderApp(['/payments'])
 
     expect(screen.getByRole('heading', { level: 1, name: 'Payments' })).toBeInTheDocument()
-    expect(
-      screen.getByRole('heading', { level: 2, name: "This is where you'll find each payment" }),
-    ).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /^Filter/ })).toBeInTheDocument()
+    expect(screen.getByRole('columnheader', { name: 'Customer' })).toBeInTheDocument()
+    expect(screen.getByRole('columnheader', { name: 'Charge date' })).toBeInTheDocument()
   })
 
   it('renders page content for non-empty routes', () => {
@@ -40,6 +40,15 @@ describe('App routing and layout', () => {
     expect(
       screen.getByText('API keys, webhooks, and integration settings live here.'),
     ).toBeInTheDocument()
+  })
+
+  it('renders the payouts table route', () => {
+    renderApp(['/payouts'])
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Payouts' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /^Filter/ })).toBeInTheDocument()
+    expect(screen.getByRole('columnheader', { name: 'Recipient' })).toBeInTheDocument()
+    expect(screen.getByRole('columnheader', { name: 'Payout date' })).toBeInTheDocument()
   })
 
   it('navigates when a sidebar link is clicked', async () => {

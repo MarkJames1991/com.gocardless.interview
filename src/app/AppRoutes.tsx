@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import {PageContent} from "../components/pages/PageContent.tsx";
 import {HomePage} from "../pages/home/HomePage.tsx";
 import PaymentsPage from "../pages/payments/PaymentsPage.tsx";
+import PayoutsPage from "../pages/payouts/PayoutsPage.tsx";
 import { appRoutes } from './routeConfig'
 
 export function AppRoutes() {
@@ -9,6 +10,7 @@ export function AppRoutes() {
     <Routes>
       <Route element={<HomePage />} path="/" />
       <Route element={<PaymentsPage />} path="/payments" />
+      <Route element={<PayoutsPage />} path="/payouts" />
       {appRoutes.map((route) => (
         <Route
           key={route.path}
