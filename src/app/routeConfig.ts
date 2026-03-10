@@ -1,0 +1,40 @@
+export type AppRoute = {
+  path: string
+  title: string
+  description?: string
+  emptyState?: boolean
+}
+
+export const appRoutes: AppRoute[] = [
+  { path: '/payments', title: 'Payments', emptyState: true },
+  {
+    path: '/subscription-templates',
+    title: 'Subscription templates',
+    description: 'Create, organize, and publish subscription templates for customers.',
+  },
+  {
+    path: '/payouts',
+    title: 'Payouts',
+    description: 'Track outgoing payouts and their settlement status.',
+  },
+  {
+    path: '/customers',
+    title: 'Customers',
+    description: 'Find customers, manage mandates, and take new payments.',
+  },
+  {
+    path: '/success-plus',
+    title: 'Success+',
+    description: 'Recovery and optimization settings for failed payments.',
+  },
+  {
+    path: '/protect-plus',
+    title: 'Protect+',
+    description: 'Fraud prevention and payment risk monitoring controls.',
+  },
+  {
+    path: '/developers',
+    title: 'Developers',
+    description: 'API keys, webhooks, and integration settings live here.',
+  },
+]
