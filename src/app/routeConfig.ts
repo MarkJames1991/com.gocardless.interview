@@ -6,7 +6,6 @@ export type AppRoute = {
 }
 
 export const appRoutes: AppRoute[] = [
-  { path: '/payments', title: 'Payments', emptyState: true },
   {
     path: '/subscription-templates',
     title: 'Subscription templates',

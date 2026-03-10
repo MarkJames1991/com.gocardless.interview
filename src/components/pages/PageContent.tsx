@@ -6,6 +6,7 @@ import {
 } from '../../components/icons/AppIcons'
 import { Button } from '../../components/button/Button'
 import { PaymentsEmptyState } from '../payments/PaymentsEmptyState'
+import PageTitle from "./PageTitle.tsx";
 
 type PageContentProps = {
   title: string
@@ -17,11 +18,7 @@ export function PageContent({ title, description, emptyState = false }: PageCont
   return (
     <div className="min-w-0 pt-8 sm:pt-12 lg:pt-16">
       <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
-        <div className="min-w-0">
-          <h1 className="break-words text-2xl font-semibold tracking-[-0.03em] text-[#1f1d1a]">
-            {title}
-          </h1>
-        </div>
+        <PageTitle title={title}/>
         <Button className="self-start sm:px-6 sm:py-4 sm:text-base">
           <span>Create payment</span>
           <PlusIcon />

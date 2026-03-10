@@ -1,12 +1,14 @@
 import { Route, Routes } from 'react-router-dom'
 import {PageContent} from "../components/pages/PageContent.tsx";
 import {HomePage} from "../pages/home/HomePage.tsx";
+import PaymentsPage from "../pages/payments/PaymentsPage.tsx";
 import { appRoutes } from './routeConfig'
 
 export function AppRoutes() {
   return (
     <Routes>
       <Route element={<HomePage />} path="/" />
+      <Route element={<PaymentsPage />} path="/payments" />
       {appRoutes.map((route) => (
         <Route
           key={route.path}
