@@ -1,0 +1,64 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+@theme {
+    --text-xs: 0.7rem;
+    --text-sm: 0.833rem;
+    --text-base: 14px;
+    --text-lg: 16px;
+    --text-xl: 20px;
+    --text-2xl: 26px;
+    --color-light-button: #73767d;
+    --color-temporal:#8a50c4;
+    --color-primary: #0AB4D2;
+    --color-primary-foreground: #ffffff;
+    --color-footer-background: #f0f3f6;
+    --color-button-primary: #0AB4D2;
+    --color-button-primary-hover: #0AB4D2;
+    --color-button-primary-text: #0AB4D2;
+    --color-body-text:#333333;
+    --color-card:#ffffff;
+    --color-internal-card:#F9F9FA;
+    --color-subtitle:#aaaeb3;
+    --color-dropzone-inactive:#6a7282;
+    --color-dropzone-hover:#0AB4D2;
+    --color-popover:#ffffff;
+    --color-popover-foreground:#333333;
+    --color-muted:oklch(.94 0 0);
+    --color-layout-header:#ffffff;
+    --color-body:#F9F9FA;
+    --color-database-navigation-menu:#ffffff;
+    --color-table-background:#fcfcfc;
+    --color-table-font:#aaaeb3;
+    --color-footer-font:#8f9ca1;
+    --color-table-full-page-footer:#ffffff;
+    --color-table-footer-color:#fcfdfd;
+    --font-family: 'Haffer', "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+
+    /*side-menu-layout*/
+    --color-side-menu-layout-topbar: #ffffff;
+    --color-side-menu-layout-stroke: #E2E8F0;
+    --color-stroke: rgb(223, 221, 218);
+    /**Marketing**/
+    --color-marketing-login-banner:#1A1A1A;
+
+    --radius-theme-outer: 0.25rem;
+    --radius-theme-inner: 0.2rem;
+
+    --color-tooltip:#1A1A1A;
+    --color-tooltip-foreground: #ffffff;
+}
+
+
+@layer base {
+    body {
+        @apply font-family;
+        @apply text-base
+    }
+    @layer base {
+        .ant-form-item-label > label {
+            @apply font-medium;
+        }
+    }
+}

@@ -1,0 +1,99 @@
+/* -----------------------------------------------------
+   Modern iOS-Safe CSS Reset
+   ----------------------------------------------------- */
+
+/* 1. Box-sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+
+
+/* 3. Fix iOS text rendering + font scaling */
+html {
+    -webkit-text-size-adjust: 100%; /* Prevents iOS font zooming */
+    text-size-adjust: 100%;
+}
+
+/* 4. Full-height on iOS without browser collapse issues */
+:root {
+    height: 100%;
+}
+
+/* iOS safe viewport unit */
+body, #root {
+    min-height: 100dvh;
+    height: 100%;
+    overflow-x: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* 5. Make media elements behave */
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+/* Fix iOS input/select rounded corners WITHOUT overriding Tailwind */
+input,
+textarea,
+select {
+    -webkit-appearance: none;
+    appearance: none;
+
+    /* Prevent iOS extra rounding */
+    border-radius: 0;
+}
+
+button {
+    -webkit-appearance: none; /* Keep, removes blue iOS button */
+}
+
+/* 7. Make buttons clickable on iOS */
+button {
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+}
+
+/* 8. Hide scrollbars on ALL browsers including iOS Safari */
+html,
+body {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+* {
+    -webkit-overflow-scrolling: touch; /* critical for smooth scrolling on iOS */
+}
+
+/* 9. Prevent accidental pull-to-refresh in apps */
+body.no-pull-to-refresh {
+    overscroll-behavior-y: contain;
+}
+
+/* 10. Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
