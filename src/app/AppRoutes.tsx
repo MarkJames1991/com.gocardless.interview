@@ -3,6 +3,7 @@ import {PageContent} from "../components/pages/PageContent.tsx";
 import {HomePage} from "../pages/home/HomePage.tsx";
 import PaymentsPage from "../pages/payments/PaymentsPage.tsx";
 import PayoutsPage from "../pages/payouts/PayoutsPage.tsx";
+import CustomersPage from "../pages/customers/CustomersPage.tsx";
 import { appRoutes } from './routeConfig'
 
 export function AppRoutes() {
@@ -11,6 +12,7 @@ export function AppRoutes() {
       <Route element={<HomePage />} path="/" />
       <Route element={<PaymentsPage />} path="/payments" />
       <Route element={<PayoutsPage />} path="/payouts" />
+      <Route element={<CustomersPage />} path="/customers" />
       {appRoutes.map((route) => (
         <Route
           key={route.path}

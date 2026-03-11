@@ -51,6 +51,15 @@ describe('App routing and layout', () => {
     expect(screen.getByRole('columnheader', { name: 'Payout date' })).toBeInTheDocument()
   })
 
+  it('renders the customers remote table route', async () => {
+    renderApp(['/customers'])
+
+    expect(screen.getByRole('heading', { level: 1, name: 'Customers' })).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByRole('columnheader', { name: 'Customer' })).toBeInTheDocument()
+    })
+  })
+
   it('navigates when a sidebar link is clicked', async () => {
     const user = userEvent.setup()
     renderApp(['/customers'])

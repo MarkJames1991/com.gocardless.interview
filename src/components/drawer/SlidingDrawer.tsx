@@ -82,8 +82,8 @@ export function SlidingDrawer({ isOpen, onClose, children }: SlidingDrawerProps)
 
 export function SlidingDrawerHeader({ title }: SlidingDrawerHeaderProps) {
   return (
-    <header className="border-b border-[#d4cec5] px-12 py-12">
-      <h2 className="text-[2.75rem] font-semibold tracking-[-0.02em] text-[#262320]">{title}</h2>
+    <header className="border-b border-stroke p-3 flex flex-col justify-center">
+      <h2 className="text-2xl font-medium text-[#262320]">{title}</h2>
     </header>
   )
 }
@@ -93,5 +93,5 @@ export function SlidingDrawerContent({ children }: SlidingDrawerContentProps) {
 }
 
 export function SlidingDrawerFooter({ children }: SlidingDrawerFooterProps) {
-  return <footer className="border-t border-[#d4cec5] px-10 py-8">{children}</footer>
+  return <footer className="border-t border-stroke p-3">{children}</footer>
 }

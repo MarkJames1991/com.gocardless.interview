@@ -23,7 +23,7 @@ export function Sidebar() {
       </div>
 
       <div
-        className={`${isMobileMenuOpen ? 'mt-6 block' : 'hidden'} lg:mt-0 lg:block w-full`}
+        className={`${isMobileMenuOpen ? 'mt-6 flex' : 'hidden'} w-full flex-col lg:mt-0 lg:flex lg:flex-1`}
         data-testid="sidebar-panel"
       >
         <SidebarMenu
@@ -33,14 +33,14 @@ export function Sidebar() {
         />
 
         <Button
-          className="mt-8 w-full bg-[#e6ea47] text-base font-semibold text-[#15130f] hover:bg-[#f1f56e] lg:w-auto"
+          className="mt-8 w-full bg-[#e6ea47] text-base font-semibold text-black hover:bg-[#f1f56e]"
           variant="secondary"
         >
           Create payment
         </Button>
 
         <Button
-          className="mt-8 h-auto w-fit bg-transparent px-0 py-0 text-left text-[1.02rem] font-semibold text-white/90 hover:bg-transparent hover:text-white"
+          className="mt-auto h-auto w-fit bg-transparent px-0 py-0 pt-8 text-left text-[1.02rem] font-semibold text-white/90 hover:bg-transparent hover:text-white"
           variant="ghost"
         >
           Leave feedback

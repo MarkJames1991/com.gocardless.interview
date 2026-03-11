@@ -26,7 +26,7 @@ describe('Sidebar mobile behavior', () => {
     await user.click(menuButton)
 
     expect(screen.getByRole('button', { name: 'Close' })).toHaveAttribute('aria-expanded', 'true')
-    expect(panel.className).toContain('block')
+    expect(panel.className).toContain('flex')
   })
 
   it('closes the mobile panel after navigation click', async () => {
