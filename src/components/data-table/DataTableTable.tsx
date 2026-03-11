@@ -7,6 +7,7 @@ type DataTableTableProps<TData extends DataTableRow> = {
   columns: DataTableColumn<TData>[]
   data: TData[]
   emptyMessage: ReactNode
+  getRowKey?: (row: TData, index: number) => string
   onSortChange: (nextSort: SortState) => void
   sortState: SortState
   tableLabel: string
@@ -16,6 +17,7 @@ export function DataTableTable<TData extends DataTableRow>({
   columns,
   data,
   emptyMessage,
+  getRowKey,
   onSortChange,
   sortState,
   tableLabel,
@@ -83,7 +85,10 @@ export function DataTableTable<TData extends DataTableRow>({
         <tbody>
           {data.length > 0 ? (
             data.map((row, rowIndex) => (
-              <tr key={rowIndex} className="border-b border-[#ebe6df] last:border-b-0">
+              <tr
+                key={getRowKey ? getRowKey(row, rowIndex) : rowIndex}
+                className="border-b border-[#ebe6df] last:border-b-0"
+              >
                 {columns.map((column) => (
                   <td
                     key={String(column.accessorKey)}

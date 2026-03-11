@@ -1,90 +1,100 @@
-# GoCardless Interview Exercise
+# GoCardless Frontend Interview Submission
 
-This repository contains a frontend implementation of a GoCardless-style dashboard using React, TypeScript, Vite, and Tailwind CSS.
+This project is structured and documented for **technical review**.  
+It demonstrates product-quality frontend engineering around component design, state boundaries, test coverage, and maintainability.
 
-It includes:
-- App shell with responsive sidebar and top navigation
-- Payments, Payouts, and Customers pages
-- Reusable `DataTable` with sorting, pagination, and pluggable filter drawer
-- `RemoteDataTable` wrapper for async data loading
-- Sliding drawer infrastructure and URL-param drawer hook
-- Unit and integration tests (Vitest + Testing Library)
+## What Was Built
 
-## Stack
+- Responsive dashboard shell (sidebar + top actions)
+- Route-based pages:
+  - Home
+  - Payments
+  - Payouts
+  - Customers (remote table stub)
+- Reusable table system:
+  - `DataTable` (sorting, pagination, filter entry point)
+  - Pagination provider + extracted pagination UI
+  - `RemoteDataTable` (async loading/error/retry/total handling)
+- Drawer system:
+  - Sliding drawer primitives
+  - URL param state hook (`useDrawerParam`)
+- Ant Design form-driven filters for Payments and Payouts
 
-- React 19
-- TypeScript
-- Vite 7
-- Tailwind CSS 4
-- React Router 7
-- Ant Design (`Form`) for filter forms
-- Vitest + Testing Library for tests
+## Reviewer Quick Start
 
-## Run Locally
-
-### Prerequisites
-- Node.js 20+
-- Yarn 1.22+
-
-### Install
 ```bash
 yarn
-```
-
-### Start dev server
-```bash
+yarn lint
+yarn test
+yarn build
 yarn dev
 ```
 
-### Build
-```bash
-yarn build
-```
+Prereqs:
+- Node.js 20+
+- Yarn 1.22+
 
-### Lint
-```bash
-yarn lint
-```
+## How To Review (Suggested Order)
 
-### Test
-```bash
-yarn test
-```
+1. `src/components/data-table`
+   - `DataTable.tsx` (composition)
+   - `DataTableContent.tsx` (state orchestration)
+   - `DataTableTable.tsx` (rendering + sortable headers)
+   - `DataTablePagination.tsx` + provider/store
+   - `RemoteDataTable.tsx` (async wrapper)
+2. `src/components/drawer`
+   - drawer primitives and URL-param hook behavior
+3. `src/pages/payments` and `src/pages/payouts`
+   - filter form integration and data filtering
+4. `src/pages/customers/CustomersPage.tsx`
+   - remote table stub pattern for backend wiring
+
+## Engineering Decisions
+
+- **Composition over monoliths**: DataTable was split into focused modules (toolbar, table, sorting, pagination context/provider) to isolate responsibilities.
+- **State boundaries**:
+  - Pagination state in dedicated provider/store.
+  - Sort state local to table content.
+  - Route-driven drawer state for deep-linkability/back-button behavior.
+- **Remote wrapper abstraction**:
+  - `RemoteDataTable` normalizes loading/error/retry and optional remote total count.
+  - Keeps page-level code minimal and backend integration straightforward.
+- **Type safety**:
+  - Strong generics for table rows/columns and service-layer hooks.
+
+## Test Strategy
+
+The test suite is behavior-focused and includes:
+
+- Unit coverage for:
+  - sorting helpers
+  - pagination provider behavior
+  - drawer wrappers and notifications drawer
+  - filter forms (change/clear/submit)
+- Component integration coverage for:
+  - DataTable interactions (sorting, pagination, filter drawer integration)
+  - RemoteDataTable async states (loading/error/retry/refetch)
+- Route/page coverage for:
+  - App routing and navigation
+  - Payments/Payouts/Customers table and filtering behavior
+
+Current status:
+- `yarn test` passes (full suite)
+- `yarn lint` passes
+- `yarn build` passes
+
+## Tradeoffs and Follow-Ups
+
+- Data for Payments/Payouts/Customers is currently stubbed to keep the exercise self-contained.
+- Build warns on bundle size; next iteration would add route-level code splitting and chunk strategy.
+- If connected to production APIs, next steps would include:
+  - React Query provider integration at app root
+  - request cancellation + retry policies
+  - accessibility audit pass (focus management and keyboard-only UX review)
 
 ## Environment
 
 Optional:
-- `VITE_API_PATH` (used by `ServiceCall` for API base path)
+- `VITE_API_PATH` for `ServiceCall` base URL.
 
-If omitted, requests use relative endpoints.
-
-## Project Structure (high level)
-
-- `src/app` - shell, routes, route config
-- `src/components`
-  - `data-table` - reusable table + pagination provider + remote wrapper
-  - `drawer` - sliding drawer primitives + URL param integration
-  - `sidebar`, `button`, `stat-card`, `dropdown-menu`, etc.
-- `src/pages`
-  - `home`, `payments`, `payouts`, `customers`
-- `src/services`
-  - `ServiceCall`
-  - dashboard data hooks
-
-## Testing Approach
-
-The suite focuses on behavior:
-- Routing and app integration
-- Sidebar interactions (desktop + mobile)
-- Drawer open/close and URL param behavior
-- DataTable sorting, pagination, filter drawer integration
-- RemoteDataTable loading/error/retry/refetch behavior
-- Payments/Payouts/Customers page-level filtering and rendering
-
-Current status: all tests pass with `yarn test`.
-
-## Notes / Tradeoffs
-
-- UI and interactions are intentionally componentized for interview readability and incremental extension.
-- Some data is stubbed locally to demonstrate behavior without backend dependency.
-- Vite build currently warns about bundle chunk size; this is expected in current scope and can be addressed with route-level code splitting if needed.
+If omitted, endpoints are resolved as relative paths.

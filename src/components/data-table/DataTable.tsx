@@ -6,6 +6,7 @@ export function DataTable<TData extends DataTableRow>({
   columns,
   data,
   emptyMessage = 'No results found.',
+  getRowKey,
   onExport,
   onFilter,
   onImport,
@@ -29,6 +30,7 @@ export function DataTable<TData extends DataTableRow>({
         emptyMessage={emptyMessage}
         filterDrawerName={filterDrawerName}
         filterDrawerTitle={filterDrawerTitle}
+        getRowKey={getRowKey}
         onExport={onExport}
         onFilter={onFilter}
         onImport={onImport}
@@ -41,4 +43,3 @@ export function DataTable<TData extends DataTableRow>({
 }
 
 export type { DataTableColumn, DataTableProps } from './types'
-

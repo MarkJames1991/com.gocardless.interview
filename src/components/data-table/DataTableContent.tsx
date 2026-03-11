@@ -12,6 +12,7 @@ export function DataTableContent<TData extends DataTableRow>({
   emptyMessage,
   filterDrawerName,
   filterDrawerTitle,
+  getRowKey,
   onExport,
   onFilter,
   onImport,
@@ -42,6 +43,7 @@ export function DataTableContent<TData extends DataTableRow>({
         columns={columns}
         data={currentPageData}
         emptyMessage={emptyMessage}
+        getRowKey={getRowKey}
         sortState={sortState}
         tableLabel={tableLabel}
         onSortChange={setSortState}
@@ -51,4 +53,3 @@ export function DataTableContent<TData extends DataTableRow>({
     </section>
   )
 }
-

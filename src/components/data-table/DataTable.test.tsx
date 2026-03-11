@@ -251,4 +251,24 @@ describe('DataTable', () => {
     expect(cells[1]).toHaveTextContent('20.00 GBP')
     expect(cells[2]).toHaveTextContent('30.00 GBP')
   })
+
+  it('uses custom getRowKey for row identity', async () => {
+    const user = userEvent.setup()
+    render(
+      <DataTable
+        columns={columns}
+        data={[
+          { customer: 'Customer 1', amount: '1.00 GBP', status: 'Confirmed' },
+          { customer: 'Customer 2', amount: '2.00 GBP', status: 'Confirmed' },
+          { customer: 'Customer 3', amount: '3.00 GBP', status: 'Confirmed' },
+        ]}
+        getRowKey={(row) => row.customer}
+        pageSize={2}
+      />,
+    )
+
+    expect(screen.getByText('Customer 1')).toBeInTheDocument()
+    await user.click(screen.getByRole('button', { name: 'Next page' }))
+    expect(screen.getByText('Customer 3')).toBeInTheDocument()
+  })
 })

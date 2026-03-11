@@ -21,6 +21,7 @@ export type DataTableProps<TData extends DataTableRow> = {
   columns: DataTableColumn<TData>[]
   data: TData[]
   emptyMessage?: ReactNode
+  getRowKey?: (row: TData, index: number) => string
   onExport?: () => void
   onFilter?: () => void
   onImport?: () => void
@@ -39,6 +40,7 @@ export type DataTableContentProps<TData extends DataTableRow> = {
   emptyMessage: ReactNode
   filterDrawerName: string
   filterDrawerTitle: string
+  getRowKey?: (row: TData, index: number) => string
   onExport?: () => void
   onFilter?: () => void
   onImport?: () => void
@@ -53,4 +55,3 @@ export type SortState = {
   direction: SortDirection
   key: string
 } | null
-
