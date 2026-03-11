@@ -1,73 +1,90 @@
-# React + TypeScript + Vite
+# GoCardless Interview Exercise
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This repository contains a frontend implementation of a GoCardless-style dashboard using React, TypeScript, Vite, and Tailwind CSS.
 
-Currently, two official plugins are available:
+It includes:
+- App shell with responsive sidebar and top navigation
+- Payments, Payouts, and Customers pages
+- Reusable `DataTable` with sorting, pagination, and pluggable filter drawer
+- `RemoteDataTable` wrapper for async data loading
+- Sliding drawer infrastructure and URL-param drawer hook
+- Unit and integration tests (Vitest + Testing Library)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Stack
 
-## React Compiler
+- React 19
+- TypeScript
+- Vite 7
+- Tailwind CSS 4
+- React Router 7
+- Ant Design (`Form`) for filter forms
+- Vitest + Testing Library for tests
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Run Locally
 
-## Expanding the ESLint configuration
+### Prerequisites
+- Node.js 20+
+- Yarn 1.22+
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Install
+```bash
+yarn
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Start dev server
+```bash
+yarn dev
 ```
+
+### Build
+```bash
+yarn build
+```
+
+### Lint
+```bash
+yarn lint
+```
+
+### Test
+```bash
+yarn test
+```
+
+## Environment
+
+Optional:
+- `VITE_API_PATH` (used by `ServiceCall` for API base path)
+
+If omitted, requests use relative endpoints.
+
+## Project Structure (high level)
+
+- `src/app` - shell, routes, route config
+- `src/components`
+  - `data-table` - reusable table + pagination provider + remote wrapper
+  - `drawer` - sliding drawer primitives + URL param integration
+  - `sidebar`, `button`, `stat-card`, `dropdown-menu`, etc.
+- `src/pages`
+  - `home`, `payments`, `payouts`, `customers`
+- `src/services`
+  - `ServiceCall`
+  - dashboard data hooks
+
+## Testing Approach
+
+The suite focuses on behavior:
+- Routing and app integration
+- Sidebar interactions (desktop + mobile)
+- Drawer open/close and URL param behavior
+- DataTable sorting, pagination, filter drawer integration
+- RemoteDataTable loading/error/retry/refetch behavior
+- Payments/Payouts/Customers page-level filtering and rendering
+
+Current status: all tests pass with `yarn test`.
+
+## Notes / Tradeoffs
+
+- UI and interactions are intentionally componentized for interview readability and incremental extension.
+- Some data is stubbed locally to demonstrate behavior without backend dependency.
+- Vite build currently warns about bundle chunk size; this is expected in current scope and can be addressed with route-level code splitting if needed.
